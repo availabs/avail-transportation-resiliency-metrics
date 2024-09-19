@@ -1,4 +1,4 @@
-# AVAIL Trasportation Resiliency Metrics Project
+# AVAIL Transportation Resiliency Metrics Project
 
 ## Python
 
