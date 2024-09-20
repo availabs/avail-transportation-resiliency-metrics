@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# find ./work_dirs -type d -name 'census-tract-36001*' \
+find ./work_dirs -type d -name 'county-subdivision-36001*' \
+  | sort \
+  | while IFS= read -r work_dir
+  do
+    echo $work_dir
+    python run.py $work_dir
+  done

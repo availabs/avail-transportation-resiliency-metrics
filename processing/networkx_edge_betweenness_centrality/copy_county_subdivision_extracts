@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -euo pipefail
+
+find '/home/avail/AVAIL/avail-gis-toolkit/data/osm/' -type d -name 'county-subdivision-36001*' \
+  | sort \
+  | while IFS= read -r extract_dir
+  do
+    dir=$(basename $extract_dir)
+    mkdir -p ./work_dirs/$dir
+
+    f=$(find $extract_dir -type f -name '*.osm.pbf')
+
+    cp $f "./work_dirs/$dir/$(basename $f)"
+  done
+
