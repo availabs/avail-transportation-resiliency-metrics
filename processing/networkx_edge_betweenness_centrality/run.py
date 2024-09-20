@@ -172,8 +172,9 @@ def create_gpkg(with_centralities=True):
         gdf_nodes.to_file(gpkg_path, layer='intersections', driver='GPKG')
         gdf_relationships.to_file(gpkg_path, layer='roadways', driver='GPKG')
     except:
+        print('Error writing GPKG.', file=sys.stderr)
         os.remove(gpkg_path)
-        raise Exception('Error writing GPKG.')
+        raise 
 
 
 def main():
