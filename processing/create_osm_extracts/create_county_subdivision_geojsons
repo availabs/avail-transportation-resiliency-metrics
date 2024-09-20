@@ -1,0 +1,25 @@
+#!/bin/bash
+
+GDB=./initial_data/tlgdb_2022_a_36_ny.gdb
+
+OUTDIR=./county_subdivision_geojson
+
+mkdir -p $OUTDIR
+
+ogr2ogr -lco STRING_QUOTING=IF_NEEDED -F CSV /vsistdout/ -sql "SELECT GEOID FROM County_Subdivision" $GDB \
+  | tail -n +2 \
+  | sort \
+  | while IFS= read -r geoid
+  do
+    echo $geoid
+    
+    ogr2ogr \
+      -F GeoJSONSeq \
+      /vsistdout/ \
+      -where "GEOID = '$geoid'" \
+      $GDB \
+      County_Subdivision \
+    | gzip \
+    > "$OUTDIR/county-subdivision-$geoid.geojson.gz"
+  done
+
