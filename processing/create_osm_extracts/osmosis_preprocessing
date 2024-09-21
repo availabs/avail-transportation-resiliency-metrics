@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# https://gis.stackexchange.com/questions/14086/how-to-filter-osm-files-based-on-tags-using-osmosis
+
+INF=./osm/new-york-240101.osm.pbf
+OUTF=./osm/major-roadways_new-york-240101.osm.pbf
+
+rm -f $OUTF
+
+../../lib/osmosis/osmosis-0.49.2/bin/osmosis \
+  --read-pbf file=$INF \
+  --tag-filter accept-ways \
+      highway=motorway,motorway_link,trunk,trunk_link,primary,primary_link,secondary,secondary_link,tertiary,tertiary_link \
+  --tag-filter reject-relations \
+  --used-node \
+  --sort TypeThenId \
+  --write-pbf file=$OUTF
