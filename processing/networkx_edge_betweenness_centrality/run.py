@@ -3,6 +3,7 @@ import os
 from glob import glob 
 from enum import Enum
 import pickle
+import functools
 
 import networkx as nx
 import pyrosm
@@ -53,11 +54,11 @@ def save_workflow_stage_output(stage, output):
 
 # Get the osm.pbf file path
 def get_osm_pbf_file():
-    pbf_files = glob(f"{work_dir}/**/*.osm.pbf")
+    pbf_files = glob(f"{work_dir}/**/*.osm.pbf", recursive=True)
 
     # Verify that there is a single osm.pbf file in the work_dir.
     if len(pbf_files) != 1:
-        raise Exception(f'There must be exactly 1 osm.pbf file in the work directory {work_dir}')
+        raise Exception(f'There must be exactly 1 osm.pbf file in the work directory {work_dir}. Found {len(pbf_files)}')
 
     return pbf_files[0]
 
@@ -88,6 +89,7 @@ def flatten(k, v):
 
     return v[0] if v else None
 
+@functools.cache
 def create_osmnx_simplified_graph():
     stage = WorkflowPipelineStages.OSMNX
 
