@@ -11,7 +11,6 @@ rm -f $OUTF
   --read-pbf file=$INF \
   --tag-filter accept-ways \
       highway=motorway,motorway_link,trunk,trunk_link,primary,primary_link,secondary,secondary_link,tertiary,tertiary_link \
-  --tag-filter reject-relations \
   --used-node \
   --sort TypeThenId \
   --write-pbf file=$OUTF
