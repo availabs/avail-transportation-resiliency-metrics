@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 GDB=./initial_data/tlgdb_2022_a_36_ny.gdb
 
 OUTDIR=./county_subdivision_geojson

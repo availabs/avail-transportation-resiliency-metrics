@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -euo pipefail
+
+# https://github.com/openstreetmap/osmosis/blob/main/doc/detailed-usage.adoc
 # https://gis.stackexchange.com/questions/14086/how-to-filter-osm-files-based-on-tags-using-osmosis
 
 INF=./osm/new-york-240101.osm.pbf
