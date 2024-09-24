@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -eou pipefail
+
+LAYER_NAME=nysdot_roadway_inventory_system
+
+IN_GDB=./aux_gis_datasets/nys-roadway-inventory-system-v20210800.gdb
+
+OUT_GPKG=nysdot_region_1_network_centrality_analysis.gpkg
+
+ogr2ogr \
+  -F GPKG \
+  $OUT_GPKG \
+  -overwrite \
+  -nln $LAYER_NAME \
+  -t_srs EPSG:4326 \
+  -where "Region='1'" \
+  $IN_GDB \
+  roadway_inventory_system
+
+ogrinfo -sql "DROP TABLE IF EXISTS fips_codes" $OUT_GPKG
+
+ogr2ogr \
+  -F GPKG \
+  $OUT_GPKG \
+  -overwrite \
+  -lco FID='id' \
+  -nln fips_codes \
+  -t_srs EPSG:4326 \
+  -sql "
+    SELECT
+        DISTINCT Fips_CO AS id,
+        ('36' || CAST(substr('00' || Fips_CO, -3, 3) AS TEXT)) AS fips_code
+      FROM $LAYER_NAME
+  " \
+  $OUT_GPKG \

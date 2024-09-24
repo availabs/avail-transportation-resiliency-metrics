@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -eou pipefail
+
+OUT_GPKG=nysdot_region_1_network_centrality_analysis.gpkg
+
+sqlite3 $OUT_GPKG "VACUUM"
+
+chmod -w $OUT_GPKG

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -eou pipefail
+
+IN_GDB=../state_level/motorway-to-tertiary-roadways_new-york-240101.gpkg
+
+OUT_GPKG=nysdot_region_1_network_centrality_analysis.gpkg
+
+ogr2ogr \
+  -F GPKG \
+  $OUT_GPKG \
+  -overwrite \
+  -nlt PROMOTE_TO_MULTI \
+  -nln state_level_centrality \
+  -t_srs EPSG:4326 \
+  $IN_GDB \
+  roadways
+
+ogr2ogr \
+  -F GPKG \
+  $OUT_GPKG \
+  -overwrite \
+  -nlt PROMOTE_TO_MULTI \
+  -nln state_level_centrality_region_subnet \
+  -t_srs EPSG:4326 \
+  -clipsrc $OUT_GPKG \
+  -clipsrclayer county \
+  $IN_GDB \
+  roadways

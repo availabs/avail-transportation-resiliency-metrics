@@ -1,0 +1,47 @@
+#!/bin/bash
+
+set -eou pipefail
+
+IN_GDB=./aux_gis_datasets/tlgdb_2022_a_36_ny.gdb
+
+OUT_GPKG=nysdot_region_1_network_centrality_analysis.gpkg
+
+FIPS_CODE_LIST="$(
+  sqlite3 $OUT_GPKG "
+    SELECT
+        group_concat(fips_code | '', ',')
+      FROM fips_codes
+  " \
+  | sed "s/^\|$/'/g" \
+  | sed "s/,/','/g"
+)"
+
+ogr2ogr \
+  -F GPKG \
+  $OUT_GPKG \
+  -overwrite \
+  -nln county \
+  -where "geoid IN ($FIPS_CODE_LIST)" \
+  -t_srs EPSG:4326 \
+  $IN_GDB \
+  County
+
+ogr2ogr \
+  -F GPKG \
+  $OUT_GPKG \
+  -overwrite \
+  -nln county_subdivision \
+  -where "substr(geoid, 1, 5) IN ($FIPS_CODE_LIST)" \
+  -t_srs EPSG:4326 \
+  $IN_GDB \
+  County_Subdivision
+
+ogr2ogr \
+  -F GPKG \
+  $OUT_GPKG \
+  -overwrite \
+  -nln census_tract \
+  -where "substr(geoid, 1, 5) IN ($FIPS_CODE_LIST)" \
+  -t_srs EPSG:4326 \
+  $IN_GDB \
+  Census_Tract

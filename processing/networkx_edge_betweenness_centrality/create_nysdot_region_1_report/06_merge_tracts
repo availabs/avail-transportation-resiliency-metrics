@@ -1,0 +1,60 @@
+#!/bin/bash
+
+set -eou pipefail
+
+LAYER_NAME=tract_level_centrality
+
+INDIR=../census_tracts
+
+OUT_GPKG=nysdot_region_1_network_centrality_analysis.gpkg
+
+IN_GPKGS="$(
+  for fips_code in $(sqlite3 $OUT_GPKG "SELECT fips_code FROM fips_codes ORDER BY 1");
+  do
+    find $INDIR -type f -name network.gpkg \
+      | grep "county-${fips_code}_" \
+      | sort
+  done
+)"
+
+ogr2ogr \
+  -F GPKG \
+  $OUT_GPKG \
+  -limit 0 \
+  -t_srs EPSG:4326 \
+  -overwrite \
+  -nln $LAYER_NAME \
+  $(head -1 <<< "$IN_GPKGS") \
+  roadways
+
+ogrinfo \
+  -dialect SQLite \
+  -sql "ALTER TABLE ${LAYER_NAME} ADD COLUMN geoid TEXT" \
+  $OUT_GPKG
+
+echo "$IN_GPKGS" \
+  | while IFS= read -r in_gpkg
+  do
+    # census-tract-36031960100_county-36031_new-york-240101/
+    geoid=$(
+      echo $in_gpkg \
+        | sed 's/.*census-tract-\([0-9]\{11\}\).*/\1/'
+      )
+
+    echo "-->$geoid<--"
+
+    ogr2ogr \
+      -F GPKG \
+      $OUT_GPKG \
+      -append \
+      -update \
+      -t_srs EPSG:4326 \
+      -nln $LAYER_NAME \
+      "$in_gpkg" \
+      roadways
+
+    ogrinfo \
+      -dialect SQLite \
+      -sql "UPDATE ${LAYER_NAME} SET geoid='$geoid' WHERE (geoid IS NULL)" \
+      $OUT_GPKG
+  done
