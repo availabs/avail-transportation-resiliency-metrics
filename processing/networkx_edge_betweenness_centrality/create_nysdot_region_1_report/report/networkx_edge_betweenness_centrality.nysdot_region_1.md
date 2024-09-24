@@ -18,11 +18,11 @@ Resources:
 
 ### Problems with divide and conquer road network partitioning
 
-Computing betweenness centrality also presents the challenge that partitioning the network to run the measure on manageably sized subnetworks dramatically affects the results. Intuitively, road network partitions essentially introduce impassable artificial barriers, in effect turning all roads at a partition boundaries into dead ends.
+Computing betweenness centrality at scale presents the challenge that partitioning the network to run the measure on manageably sized subnetworks dramatically affects the results. Intuitively, road network partitions essentially introduce impassable artificial barriers, in effect turning all roads at partition boundaries into dead ends.
 
 Therefore, any divide and conquer strategy employed to reduce the betweenness centrality metric's computational cost must consider the severe distortive effects of partitioning the network prior to computation.
 
-A viable option for reducing the network work size for large areas is to drop lower level roads. For example, dropping all residential and service roads reduces the state-wide network's size enough to make computation faster than computing the metric for all roads with some larger counties.
+A viable option for reducing the network work size for large areas is to drop lower level roads. For example, dropping all residential and service roads reduces the state-wide network's size enough to make computation faster than computing the metric for all roads within some larger counties.
 
 It is worth mentioning that, when comparing edge betweenness centrality to AADT, it becomes evident that betweenness centrality metric computed using speedlimits alone is not an adequate proxy for actual road network use even when betweenness centrality is computed for the state-wide network.
 
@@ -101,3 +101,7 @@ The following visualizations show the effect of partitioning the road network to
 ##### NYSDOT RIS AADT (NYS)
 
 ![./state_level_nysdot_ris_aadt.png](./images/state_level_nysdot_ris_aadt.png)
+
+### US Northeast (CT, MA, ME, NH, NJ, NY, PA, RI; Intersates through Primary Roads ONLY)
+
+![US Northeast Edge Betweenness Centrality](./images//us_northeast.motorway-to-primary-roadways.png)
