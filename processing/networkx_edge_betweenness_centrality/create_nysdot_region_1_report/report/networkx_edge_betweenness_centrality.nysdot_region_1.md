@@ -11,6 +11,8 @@ Roughly speaking, doubling the size of a network quadruples compututation time, 
 ![Actual Computation Time](./images/actual_computation_time.png)
 ![Theoretical Computation Time](./images/theoretical_computation_time.png)
 
+(Note: The road network with observed computation time of 50 hours was Erie County).
+
 Resources:
 
 - [NetworkX Edge Betweenness Centrality](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.centrality.edge_betweenness_centrality.html#rc3df3f41cd0d-1)
