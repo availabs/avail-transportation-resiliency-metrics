@@ -103,6 +103,21 @@ def create_osmnx_simplified_graph():
     print('Creating OSMnx simplified Graph from NetworkX Graph')
     g = ox.simplify_graph(G)
 
+# Or assign speeds to edges missing data based on dict values.
+# For edges with highway type not in dict, impute speeds.
+    hwy_speeds = {
+        'motorway': 100,
+        'trunk': 100,
+        'primary': 70,
+        'secondary': 65,
+        'tertiary': 60,
+        'motorway_link': 100,
+        'trunk_link': 100,
+        'primary_link': 70,
+        'secondary_link': 65,
+        'tertiary_link': 60,
+        'residential': 40,
+    } #etc
     # WARNING: Reindexing and exporting to GPKG throws the following error:
     #            ValueError: cannot insert osmid, already exists
     #
@@ -113,12 +128,14 @@ def create_osmnx_simplified_graph():
             data['osmid_original'] = data.pop('osmid')
 
     # NOTE: add_edge_speeds crashes without the following work around
-    for e in list(g.edges(data=True)):
-        if not (isinstance(e[2]['maxspeed'], str) or e[2]['maxspeed'] == None):
-            e[2]['maxspeed'] = flatten('maxspeed', e[2])
+    for (u, v, d) in list(g.edges(data=True)):
+        # print(d.keys())
+        if 'maxspeed' in d:
+            if not (isinstance(d['maxspeed'], str) or d['maxspeed'] == None):
+                d['maxspeed'] = flatten('maxspeed', d)
 
     # https://osmnx.readthedocs.io/en/stable/user-reference.html#osmnx.routing.add_edge_speeds
-    ox.add_edge_speeds(g)
+    ox.add_edge_speeds(g, hwy_speeds)
 
     # https://osmnx.readthedocs.io/en/stable/user-reference.html#osmnx.routing.add_edge_travel_times
     ox.add_edge_travel_times(g)
