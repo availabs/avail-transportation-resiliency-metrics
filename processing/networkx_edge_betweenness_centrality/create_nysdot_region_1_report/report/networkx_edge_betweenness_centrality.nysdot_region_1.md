@@ -104,6 +104,12 @@ The following visualizations show the effect of partitioning the road network to
 
 ![./state_level_nysdot_ris_aadt.png](./images/state_level_nysdot_ris_aadt.png)
 
-### US Northeast (CT, MA, ME, NH, NJ, NY, PA, RI; Intersates through Primary Roads ONLY)
+### US Northeast (CT, MA, ME, NH, NJ, NY, PA, RI;)
+
+####  Intersates through Primary Roads ONLY
 
 ![US Northeast Edge Betweenness Centrality](./images//us_northeast.motorway-to-primary-roadways.png)
+
+####  Intersates through Secondary Roads ONLY
+
+![US Northeast Edge Betweenness Centrality](./images//us_northeast.motorway-to-secondary-roadways.png)
