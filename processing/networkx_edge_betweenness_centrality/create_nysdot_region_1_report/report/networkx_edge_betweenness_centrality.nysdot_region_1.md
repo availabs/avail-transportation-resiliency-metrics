@@ -104,7 +104,7 @@ The following visualizations show the effect of partitioning the road network to
 
 ![./state_level_nysdot_ris_aadt.png](./images/state_level_nysdot_ris_aadt.png)
 
-### US Northeast (CT, MA, ME, NH, NJ, NY, PA, RI;)
+### US Northeast (CT, MA, ME, NH, NJ, NY, PA, RI)
 
 ####  Interstates through Primary Roads ONLY
 
