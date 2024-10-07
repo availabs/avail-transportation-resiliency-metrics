@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -eou pipefail
+
+# https://gis.stackexchange.com/a/458227
+
+docker \
+  run \
+  -t \
+  -i \
+  -p 5000:5000 \
+  -v "${PWD}/data:/data" \
+  ghcr.io/project-osrm/osrm-backend \
+  osrm-routed --max-matching-size 100000 \
+  /data/county-36001_new-york-240101.osrm
