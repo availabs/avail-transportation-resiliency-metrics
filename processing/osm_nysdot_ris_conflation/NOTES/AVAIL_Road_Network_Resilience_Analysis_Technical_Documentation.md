@@ -311,10 +311,10 @@ Coupling this project with the AVAIL's map conflation work has multiple benefits
 Firstly, it is a stated goal of the larger Road Network Reliability proposal
 to contribute a research tool to disaster and transportation planning communities.
 Providing a single tool that will enable end-to-end processing from source GIS files,
-through geo-spatial and network theory algorithms, to exploratory tools and generated
-reports will make for a much more valuable community contribution than separate
-projects that replace a single interface with fully automated processes with
-multiple interfaces requiring human orchestration.
+through geospatial and network theory algorithms, to exploratory tools and generated
+reports will make for a much more valuable community contribution. A single
+interface with fully automated processes is preferable to multiple interfaces
+requiring human orchestration of their respective processes.
 
 Additionally, the previous AVAIL Map Conflation project hit a wall with
 higher-level graph analysis. The previous version was written in JavaScript (JS)
@@ -328,12 +328,12 @@ The greater ease and simplicity gained by using community standard tooling will
 translate into a final product of much greater value to researchers outside
 AVAIL. The final product will be much more reliable as it will be built upon
 battle-tested and widely-used research community standard tools.
-Reimplementation of existing tools isolate projects and thereby forsake
-the value communities add to projects. Furthermore, maximizing the degree to
-which building upon tools with established reputations as much as possible will
-allow outside researchers to use our contribution with greater confidence.
-Plainly, as much as possible, we must embed our work within existing community works
-and maximize the [Network Effect](https://en.wikipedia.org/wiki/Network_effect).
+Reimplementing existing tools isolates projects and thereby forsakes
+the value belonging to communities adds. Furthermore, maximizing the degree to
+which we build upon tools with established reputations will allow outside
+researchers to use our contribution with greater confidence. Plainly, as much
+as possible, we must embed our work within existing community works and
+maximize the [Network Effect](https://en.wikipedia.org/wiki/Network_effect).
 
 Code is liability, whereas well-established and heavily supported community
 projects are assets. Joining this project to the rich Python geospatial and
