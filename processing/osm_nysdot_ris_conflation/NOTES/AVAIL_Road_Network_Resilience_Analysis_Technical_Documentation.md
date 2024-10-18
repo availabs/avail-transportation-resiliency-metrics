@@ -1,6 +1,6 @@
 # AVAIL Road Network Resilience Analysis (Technical Documentation)
 
-## Netork Centrality - AADT Comparison
+## Network Centrality - AADT Comparison
 
 ### Process
 
@@ -25,10 +25,10 @@
 
    1. Route geometry sent to OSRM Matching.
 
-1. OSRM Matching results enhanced by JOINing with OSM NetworkX MutliDiGraph
+1. OSRM Matching results enhanced by JOINing with OSM NetworkX [MutliDiGraph](https://networkx.org/documentation/stable/reference/classes/multidigraph.html)
 
    1. This enables further higher-level deductions in deciding map matchings.
-      1. As the network analysis capablities of this network analysis system are enhanced,
+      1. As the network analysis capabilities of this network analysis system are enhanced,
          those same capabilities can be used to improve map matching.
 
 1. OSMnx Simplified Network.
@@ -49,7 +49,7 @@
 
 ## Concerns with using Network Centrality to identify critical road segments.
 
-1. Sensitive to paritioning.
+1. Sensitive to partitioning.
 
    1. Computing network centrality is very time expensive.
    1. Reducing the problem size involves partitioning the road network.
@@ -65,7 +65,7 @@
 
 1. Ports and Railroad terminals.
 
-   1. These are critial locations in the transportation network.
+   1. These are critical locations in the transportation network.
       1. Simple road network analysis will treat them as dead ends.
    1. Hypothesis: Truck AADT will show the importance of the roads to/from these locations.
 
@@ -100,7 +100,7 @@
 
       1. Consider a village connected to the larger road network by a minor collector.
 
-         1. Further consider that the minor collector crosses waterways on the outskits of the village.
+         1. Further consider that the minor collector crosses waterways on the outskirts of the village.
          1. A flood may completely isolate the village.
 
       1. If that village is smaller, the edge may have low relative AADT but the residents will be completely isolated.
@@ -117,40 +117,40 @@ Hidden Markov Map Matching is the gold standard algorithm used by nearly all too
 
 1. https://www.microsoft.com/en-us/research/publication/hidden-markov-map-matching-noise-sparseness/
 
-From [Open source map matching with Markovdecision processes: A new method and a detailedbenchmark with existing approaches by Adrian Wöltche](https://onlinelibrary.wiley.com/doi/epdf/10.1111/tgis.13107)
+From [Open source map matching with Markov decision processes: A new method and a detailed benchmark with existing approaches by Adrian Wöltche](https://onlinelibrary.wiley.com/doi/epdf/10.1111/tgis.13107)
 
 > The research field of map matching for addressing this issue has a long and
-> comprehensive history. Early ap-proaches from around 1994 to 2005 used simple
+> comprehensive history. Early approaches from around 1994 to 2005 used simple
 > point-to-curve and curve-to-curve (Bernstein & Kornhauser, 1996;White et al., 2000)
 > map matching algorithms. Also, Discrete Fréchet Distance (Eiter & Mannila, 1994)
 > and FreeSpace Diagrams (Alt et al., 2003) were applied in geometric
 > curve-to-curve matching (Brakatsoulas et al., 2005). Amajor issue of these
 > historic approaches is that outliers (i.e., measurement errors) and the typical
 > noise of GNSS-recorded tracks cannot be resolved accurately. The matches
-> therefore were mostly inaccurate, except when theGNSS track fitted the
+> therefore were mostly inaccurate, except when the GNSS track fitted the
 > underlying road network very precisely already. The lack of accuracy is also one
-> of the con-clusions of the most prominent map matching survey of that decade in
-> Quddus et al. (2007), which gives a goodoverview of the historic map matching
+> of the conclusions of the most prominent map matching survey of that decade in
+> Quddus et al. (2007), which gives a good overview of the historic map matching
 > approaches. At that time, new technologies were demanded to address these
 > inaccuracies.
 >
 > Shortly thereafter, a major breakthrough was achieved in Newson and Krumm(2009)
-> by applying a stochas-tic method based on Hidden Markov Models (HMMs) and the
+> by applying a stochastic method based on Hidden Markov Models (HMMs) and the
 > Viterbi algorithm (Forney, 1973; Viterbi, 1967)in the domain of map matching. It
-> was inspired by Krumm et al. (2007) and Hummel (2006). The basic ideawas that
+> was inspired by Krumm et al. (2007) and Hummel (2006). The basic idea was that
 > each GNSS measurement represents an observation in the HMM and that for each
-> observation thereexist multiple potential road positions, the hidden states.
-> “Hidden,” since the real position is unknown. Eachpair of hidden state and
+> observation there exist multiple potential road positions, the hidden states.
+> “Hidden,” since the real position is unknown. Each pair of hidden state and
 > observation has an observation probability calculated from the distance
-> betweenthe measurement and the road position. In addition, each pair of adjacent
-> hidden states has a transitionprobability calculated from the routing distance
-> between the assigned road positions. The Viterbi algorithmis a dynamic
+> between the measurement and the road position. In addition, each pair of adjacent
+> hidden states has a transition probability calculated from the routing distance
+> between the assigned road positions. The Viterbi algorithms a dynamic
 > programming algorithm that finds an optimal sequence of hidden states (i.e.,
-> road positions) bymaximizing over the multiplication of all observation and
-> transition probabilities. This approach is able to dealwith the uncertainty of
+> road positions) by maximizing over the multiplication of all observation and
+> transition probabilities. This approach is able to deal with the uncertainty of
 > map matching as it weights and compares various alternating paths before it
-> selectsthe final match.To date, it is the state-of-the-art in map matching,
-> which can be seen in all the following current open sourcetools all originally
+> select the final match.To date, it is the state-of-the-art in map matching,
+> which can be seen in all the following current open source tools all originally
 > based on Newson and Krumm (2009), sometimes with further enhancements, for
 > example,Barefoot (https://github.com/bmwcarit/barefoot) (Louail et al., 2014),
 > Fast map matching (https://github.com/cyang -kth/fmm) (FMM) (Yang & Gidófalvi,
@@ -159,19 +159,19 @@ From [Open source map matching with Markovdecision processes: A new method and a
 > Machine (https://github.com/Project-OSRM/osrm- backend) (OSRM) (Luxen & Vetter,
 > 2011), Valhalla (https://github.com/valhalla/valhalla), and pgMapMatch
 > (https://github.com/amillb/pgMapMatch) (Millard-Ball et al., 2019). A notable exception
-> in FMM is that it alsoimplements an earlier method called ST-Match (Lou et al., 2009)
+> in FMM is that it also implements an earlier method called ST-Match (Lou et al., 2009)
 > which is a simpler stochastic model compared toHMMs for faster matching of
 > large tracks.
 >
 > Barefoot, FMM, and pgMapMatch are three tools explicitly designed for map
 > matching, whereasGraphHopper, OSRM, and Valhalla are designed as general-purpose
-> routing frameworks with a map matchingimplementation as an additional algorithm
-> on top. There are also differences in the used programming languagesand
+> routing frameworks with a map matching implementation as an additional algorithm
+> on top. There are also differences in the used programming languages and
 > interfaces. Table 1 gives an overview of these state-of-the-art OSS tools and
 > our own novel implementation“Map Matching 2”.F I G U R E 3 Didactic example of a
-> correctly matched track. The red recorded measurements are matched tothe most
+> correctly matched track. The red recorded measurements are matched to the most
 > probable road positions (i.e., candidates, marked by green cross-marks). This
-> leads to the lightblue lineshowing the correctly matched route.
+> leads to the lightblue line showing the correctly matched route.
 
 ### OSRM
 
@@ -223,7 +223,7 @@ These all appear to primarily use Hidden Markov Models Matching, so I wouldn't e
 
 1. [Pyrosm](https://pyrosm.readthedocs.io/en/latest/index.html)
 
-   > Pyrosm is a Python library for reading OpenStreetMap from Protocolbuffer Binary
+   > Pyrosm is a Python library for reading OpenStreetMap from Protocol buffer Binary
    > Format -files (\*.osm.pbf) into Geopandas GeoDataFrames. Pyrosm makes it easy to
    > extract various datasets from OpenStreetMap pbf-dumps including e.g. road
    > networks, buildings, Points of Interest (POI), landuse, natural elements,
@@ -308,8 +308,8 @@ These may become necessary as we scale up our analysis and replicate existing re
 
 Coupling this project with the AVAIL's map conflation work has multiple benefits.
 
-Firstly, it is a stated goal of the larger Road Network Reliablity proposal
-to contribute a reaseach tool to disaster and transportation planning communities.
+Firstly, it is a stated goal of the larger Road Network Reliability proposal
+to contribute a research tool to disaster and transportation planning communities.
 Providing a single tool that will enable end-to-end processing from source GIS files,
 through geo-spatial and network theory algorithms, to exploratory tools and generated
 reports will make for a much more valuable community contribution than separate
@@ -320,22 +320,22 @@ Additionally, the previous AVAIL Map Conflation project hit a wall with
 higher-level graph analysis. The previous version was written in JavaScript (JS)
 which has very limited community spatial and graph analysis tools. In JS, we
 needed to implement the most basic geospatial and network analysis algorithms
-from scatch. This contributed greatly to project complexity and made
+from scratch. This contributed greatly to project complexity and made
 implementing even relatively simple algorithms prohibitively costly, thus
 reducing the quality of the conflation output.
 
-The greater ease and simplicity gained by using community standary tooling will
+The greater ease and simplicity gained by using community standard tooling will
 translate into a final product of much greater value to researchers outside
 AVAIL. The final product will be much more reliable as it will be built upon
-battle-tested and widely-used research community standard tools. Unnecessary
-in-house reimplementations of existing tools isolate projects thereby foresake
+battle-tested and widely-used research community standard tools.
+Reimplementation of existing tools isolate projects and thereby forsake
 the value communities add to projects. Furthermore, maximizing the degree to
 which building upon tools with established reputations as much as possible will
 allow outside researchers to use our contribution with greater confidence.
 Plainly, as much as possible, we must embed our work within existing community works
 and maximize the [Network Effect](https://en.wikipedia.org/wiki/Network_effect).
 
-Code is liablity, whereas well-established and heavily supported community
+Code is liability, whereas well-established and heavily supported community
 projects are assets. Joining this project to the rich Python geospatial and
 graph analysis ecosystem has already enabled us to replace thousands of lines of
 code in the previous JS implementation with a single line library function call.
@@ -349,7 +349,7 @@ results. Hidden Markov Map Matching (HMMM) uses relatively low-level
 deductions, focusing on a single sequence of coordinates at a time. With more
 sophisticated graph analysis tools, we can model how routes connect into
 higher-level network structures and then use these models to improve the
-individual HMMM results. Utimately, map matching is a decision making problem,
+individual HMMM results. Ultimately, map matching is a decision making problem,
 data science yields better decisions, and Python is the programming language for
 data science.
 
