@@ -317,23 +317,23 @@ interface with fully automated processes is preferable to multiple interfaces
 requiring human orchestration of their respective processes.
 
 Additionally, the previous AVAIL Map Conflation project hit a wall with
-higher-level graph analysis. The previous version was written in JavaScript (JS)
-which has very limited community spatial and graph analysis tools. In JS, we
+higher-level graph analysis. The previous version was written in JavaScript (JS).
+The JS community has very limited spatial and graph analysis tools. In JS, we
 needed to implement the most basic geospatial and network analysis algorithms
 from scratch. This contributed greatly to project complexity and made
 implementing even relatively simple algorithms prohibitively costly, thus
 reducing the quality of the conflation output.
 
-The greater ease and simplicity gained by using community standard tooling will
-translate into a final product of much greater value to researchers outside
+The greater ease and simplicity gained from a rich ecosystem of existing tooling
+will translate into a final product of much greater value to researchers outside
 AVAIL. The final product will be much more reliable as it will be built upon
-battle-tested and widely-used research community standard tools.
-Reimplementing existing tools isolates projects and thereby forsakes
-the value belonging to communities adds. Furthermore, maximizing the degree to
-which we build upon tools with established reputations will allow outside
-researchers to use our contribution with greater confidence. Plainly, as much
-as possible, we must embed our work within existing community works and
-maximize the [Network Effect](https://en.wikipedia.org/wiki/Network_effect).
+battle-tested and widely-used research community standard tools. Reimplementing
+existing tools isolates projects and thereby forsakes the value belonging to
+communities adds. Furthermore, maximizing the degree to which we build upon
+tools with established reputations will allow outside researchers to use our
+contribution with greater confidence. Plainly, as much as possible, we must
+embed our work within existing community works and maximize the
+[Network Effect](https://en.wikipedia.org/wiki/Network_effect).
 
 Code is liability, whereas well-established and heavily supported community
 projects are assets. Joining this project to the rich Python geospatial and
